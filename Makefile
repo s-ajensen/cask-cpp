@@ -64,11 +64,7 @@ run: $(MAIN)
 .PHONY: watch
 watch:
 	@echo "Watching for changes. Press Ctrl+C to stop."
-	@while true; do \
-		clear; \
-		make test --no-print-directory; \
-		fswatch -1 -r src spec --exclude build || true; \
-	done
+	@find . -type f -iname \*\.cpp -o -iname \*\.hpp -o -iname \*\.c -o -iname \*\.h | entr make test
 
 .PHONY: clean
 clean:
